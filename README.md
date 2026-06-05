@@ -4,7 +4,7 @@
 
 ---
 
-## Table of Contents
+<!-- ## Table of Contents
 
 - [Project Overview](#project-overview)
 - [Key Findings Summary](#key-findings-summary)
@@ -22,11 +22,9 @@
 - [Installation and Setup](#installation-and-setup)
 - [Running the Pipeline](#running-the-pipeline)
 - [Important Methodological Notes](#important-methodological-notes)
-- [Publication Targets](#publication-targets)
 - [License and Data Use Agreement](#license-and-data-use-agreement)
-- [Version History](#version-history)
 
----
+--- -->
 
 ## Project Overview
 
