@@ -86,7 +86,6 @@ HCUP-NIS-Data-Work/
 ├── parse_sas_to_parquet.py          # Convert ASC to Parquet format
 ├── visualize_parquet_fixed.py       # Generate visualizations
 ├── statistical_analysis_fixed.py    # Statistical analysis and regression
-├── finalize_results.py              # Export results for publication
 └── figures/                         # All visualization outputs
     ├── age_distribution.png
     ├── correlation_heatmap.png
@@ -255,21 +254,6 @@ Income quartile based on patient ZIP code median income:
 | `top_drgs.png` | Top 10 DRGs by volume |
 | `report.html` | HTML report of all visualizations |
 
----
-
-### Step 5: Results Export
-
-**Script:** `finalize_results.py`  
-**Output Directory:** `analysis_results/`
-
-| File | Format | Purpose |
-|------|--------|---------|
-| `table1_publication.csv` | CSV | Baseline characteristics table |
-| `table2_logistic_regression.csv` | CSV | Multivariable regression results |
-| `table3_disparities.csv` | CSV | Income gradient analysis |
-| `table1_latex.txt` | LaTeX | Table 1 for journal submission |
-| `table2_latex.txt` | LaTeX | Table 2 for journal submission |
-| `COMPLETE_ANALYSIS_REPORT.txt` | Text | Narrative summary of all findings |
 
 ---
 
@@ -386,8 +370,6 @@ python3 statistical_analysis_fixed.py
 # Step 4: Generate visualizations
 python3 visualize_parquet_fixed.py
 
-# Step 5: Export final results
-python3 finalize_results.py
 ```
 
 ---
