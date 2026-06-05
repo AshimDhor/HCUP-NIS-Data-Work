@@ -1,0 +1,51 @@
+# Large data files (do not commit to GitHub)
+*.ASC
+*.asc
+*.zip
+*.duckdb
+*.parquet
+PARQUET_OUTPUT/
+FINAL_DATA/
+analysis_results/
+figures/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+*.out
+
+# Environment variables
+.env
+.env.local
+
+# Large output files
+*.csv
+*.xlsx
+*.html
