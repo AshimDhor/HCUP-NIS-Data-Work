@@ -416,31 +416,6 @@ Variables with missing data were handled through **listwise deletion**. Key vari
 
 ---
 
-## Publication Targets
-
-Based on the findings and methodological rigor, this analysis is suitable for submission to:
-
-| Journal | Focus |
-|---------|-------|
-| *JAMA Internal Medicine* | Socioeconomic disparities |
-| *Health Affairs* | Health policy and disparities |
-| *Medical Care* | Health services research |
-| *American Journal of Public Health* | Population health |
-| *Health Services Research* | Methodological and policy focus |
-
-### Suggested Manuscript
-
-**Title:** *Socioeconomic Disparities in In-Hospital Mortality: A National Analysis of 1.5 Million Hospitalizations*
-
-| Section | Content |
-|---------|---------|
-| **Abstract** | Structured (Background, Methods, Results, Conclusions) |
-| **Methods** | Cross-sectional analysis of 2023 NIS; logistic regression adjusted for age, sex, LOS; income measured by ZIP code quartile |
-| **Results** | 2.05% overall mortality; significant income gradient (2.2% lowest vs. 1.6% highest, p < 0.001); age strongest predictor (OR = 1.036/year); male sex associated with higher mortality (OR = 1.371) |
-| **Conclusions** | Persistent income-based disparities in hospital mortality exist even after adjustment for clinical factors, suggesting need for targeted interventions |
-
----
-
 ## Acknowledgments
 
 **Data Source:** HCUP National Inpatient Sample (NIS). Agency for Healthcare Research and Quality (AHRQ).
@@ -449,13 +424,6 @@ This analysis was prepared using HCUP data and follows all data use agreements a
 
 ---
 
-## Version History
-
-| Date | Version | Changes |
-|------|---------|---------|
-| 2026-06-02 | 1.0 | Initial complete pipeline. Data loaded, merged, analyzed. All visualizations generated. Results exported. |
-
----
 
 ## License and Data Use Agreement
 
