@@ -6,6 +6,7 @@
 *.parquet
 PARQUET_OUTPUT/
 FINAL_DATA/
+analysis_results/
 
 
 # Python cache
