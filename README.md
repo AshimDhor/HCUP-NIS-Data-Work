@@ -45,7 +45,7 @@ This pipeline successfully processed **6,743,716 discharge records** from the ra
 
 ## Key Findings Summary
 
-### 🔴 Primary Finding
+### Primary Finding
 
 > **Significant socioeconomic gradient in hospital mortality.**
 > Patients in the lowest income quartile had **2.2% mortality** compared to **1.6%** in the highest income quartile. After adjustment for age, sex, and length of stay, the lowest income group had approximately **37% higher mortality odds** than the highest income group.
@@ -405,14 +405,6 @@ The full dataset contains 6,743,716 records. For computational efficiency, the s
 ### Missing Data
 
 Variables with missing data were handled through **listwise deletion**. Key variables (`AGE`, `FEMALE`, `DIED`, `LOS`) had 100% completeness in the analysis sample.
-
-### Limitations
-
-- Cross-sectional design prevents causal inference
-- No post-discharge follow-up available
-- Potential coding errors in administrative data
-- Income measured at ZIP code level, not individual level
-- Sample represents approximately 22% of full dataset
 
 ---
 
