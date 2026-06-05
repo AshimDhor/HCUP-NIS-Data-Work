@@ -75,7 +75,7 @@ This pipeline successfully processed **6,743,716 discharge records** from the ra
 
 ---
 
-## Repository Structure
+<!-- ## Repository Structure
 
 ```
 HCUP-NIS-Data-Work/
@@ -98,7 +98,7 @@ HCUP-NIS-Data-Work/
     └── weekend_admissions.png
 ```
 
----
+--- -->
 
 ## Processing Pipeline
 
