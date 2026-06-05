@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head><title>NIS 2023 Visualization Report</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+h1 { color: #2c3e50; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(500px, 1fr)); gap: 20px; }
+.figure { border: 1px solid #ddd; padding: 10px; border-radius: 5px; }
+.figure img { width: 100%; height: auto; }
+.stats { background: #f0f0f0; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+<h1>NIS 2023 Hospital Discharge Data - Visualization Report</h1>
+<div class="stats">
+<h2>Summary Statistics (Sample: 999,923 discharges)</h2>
+<p><strong>Mean age:</strong> 50.5 years</p>
+<p><strong>Female:</strong> 55.0%</p>
+<p><strong>Mortality rate:</strong> 2.01%</p>
+<p><strong>Mean LOS:</strong> 4.9 days</p>
+</div>
+<div class="gallery">
+<div class="figure"><h3>Age Distribution</h3><img src="age_distribution.png"></div>
+<div class="figure"><h3>Mortality by Age</h3><img src="mortality_by_age.png"></div>
+<div class="figure"><h3>Length of Stay</h3><img src="los_distribution.png"></div>
+<div class="figure"><h3>Gender Distribution</h3><img src="gender_distribution.png"></div>
+<div class="figure"><h3>Mortality by Gender</h3><img src="mortality_by_gender.png"></div>
+<div class="figure"><h3>Seasonal Variation</h3><img src="seasonal_variation.png"></div>
+<div class="figure"><h3>Weekend vs Weekday</h3><img src="weekend_admissions.png"></div>
+<div class="figure"><h3>Correlation Heatmap</h3><img src="correlation_heatmap.png"></div>
+<div class="figure"><h3>LOS by Age</h3><img src="los_by_age.png"></div>
+<div class="figure"><h3>Top DRGs</h3><img src="top_drgs.png"></div>
+</div>
+</body>
+</html>
