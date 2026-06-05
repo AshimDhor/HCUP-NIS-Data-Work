@@ -350,18 +350,45 @@ To reproduce the complete analysis, run the scripts in order:
 # Step 1: Convert raw .ASC files to Parquet
 python3 parse_sas_to_parquet.py
 
-# Step 2: Load data into DuckDB and merge
+# Step 2: Load and merge data using DuckDB
 python3 -c "
 import duckdb
+import glob
+import os
+
+# Connect to DuckDB
 con = duckdb.connect('nis2023.duckdb')
+
+# Load core data from Parquet files
+core_files = sorted(glob.glob('PARQUET_OUTPUT/core/*.parquet'))
+for f in core_files:
+    con.execute(f'CREATE OR REPLACE TABLE core AS SELECT * FROM read_parquet(\"{f}\")')
+
+# Load severity data
+severity_files = sorted(glob.glob('PARQUET_OUTPUT/severity/*.parquet'))
+for f in severity_files:
+    con.execute(f'CREATE OR REPLACE TABLE severity AS SELECT * FROM read_parquet(\"{f}\")')
+
+# Load DX_PR_GRPS data
+dx_files = sorted(glob.glob('PARQUET_OUTPUT/dx_pr_grps/*.parquet'))
+for f in dx_files:
+    con.execute(f'CREATE OR REPLACE TABLE dx_pr_grps AS SELECT * FROM read_parquet(\"{f}\")')
+
+# Load hospital data
+hospital_files = glob.glob('PARQUET_OUTPUT/hospital/*.parquet')
+con.execute(f'CREATE OR REPLACE TABLE hospital AS SELECT * FROM read_parquet(\"{hospital_files[0]}\")')
+
+# Merge all tables
 con.execute('''
-  CREATE TABLE merged AS
+  CREATE OR REPLACE TABLE merged AS
   SELECT c.*, s.*, d.*, h.*
   FROM core c
   LEFT JOIN severity s ON c.KEY_NIS = s.KEY_NIS
   LEFT JOIN dx_pr_grps d ON c.KEY_NIS = d.KEY_NIS
   LEFT JOIN hospital h ON c.HOSP_NIS = h.HOSP_NIS
 ''')
+
+print('Merge complete. Total rows:', con.execute('SELECT COUNT(*) FROM merged').fetchone()[0])
 "
 
 # Step 3: Run statistical analysis
