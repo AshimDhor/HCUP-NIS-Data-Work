@@ -64,7 +64,7 @@ if len(age_data) > 0:
     plt.close()
     print(f"   ✓ Saved: {fig_dir}/age_distribution.png")
 else:
-    print("   ⚠️ No age data available")
+    print("    No age data available")
 
 # 2. Mortality by Age Group (FIXED)
 print("\n📊 Creating Mortality by Age Plot...")
@@ -111,9 +111,9 @@ if len(mortality_data) > 0:
     plt.tight_layout()
     plt.savefig(f'{fig_dir}/mortality_by_age.png', dpi=150, bbox_inches='tight')
     plt.close()
-    print(f"   ✓ Saved: {fig_dir}/mortality_by_age.png")
+    print(f"   Saved: {fig_dir}/mortality_by_age.png")
 else:
-    print("   ⚠️ No mortality data available")
+    print("    No mortality data available")
 
 # 3. Length of Stay Distribution
 print("\n📊 Creating Length of Stay Plot...")
@@ -156,7 +156,7 @@ if len(los_data) > 0:
     plt.close()
     print(f"   ✓ Saved: {fig_dir}/los_distribution.png")
 else:
-    print("   ⚠️ No LOS data available")
+    print("    No LOS data available")
 
 # 4. Gender Distribution
 print("\n📊 Creating Gender Distribution Plot...")
@@ -182,7 +182,7 @@ if len(gender_data) > 0:
     plt.close()
     print(f"   ✓ Saved: {fig_dir}/gender_distribution.png")
 else:
-    print("   ⚠️ No gender data available")
+    print("    No gender data available")
 
 # 5. Seasonal Variation (Admission by Month)
 print("\n📊 Creating Seasonal Variation Plot...")
@@ -211,10 +211,10 @@ if len(monthly_data) > 0:
     plt.close()
     print(f"   ✓ Saved: {fig_dir}/seasonal_variation.png")
 else:
-    print("   ⚠️ No monthly data available")
+    print("    No monthly data available")
 
 # 6. Weekend vs Weekday Admissions
-print("\n📊 Creating Weekend vs Weekday Plot...")
+print("\n Creating Weekend vs Weekday Plot...")
 weekend_data = con.execute("""
     SELECT 
         CASE WHEN CAST(AWEEKEND AS INTEGER) = 1 THEN 'Weekend' ELSE 'Weekday' END as day_type,
@@ -236,7 +236,7 @@ if len(weekend_data) > 0:
     plt.close()
     print(f"   ✓ Saved: {fig_dir}/weekend_admissions.png")
 else:
-    print("   ⚠️ No weekend data available")
+    print("    No weekend data available")
 
 # 7. Correlation Heatmap
 print("\n📊 Creating Correlation Heatmap...")
@@ -276,7 +276,7 @@ if len(corr_data) > 0:
     plt.close()
     print(f"   ✓ Saved: {fig_dir}/correlation_heatmap.png")
 else:
-    print("   ⚠️ No correlation data available")
+    print("    No correlation data available")
 
 # 8. Length of Stay by Age Group (Boxplot)
 print("\n📊 Creating LOS by Age Group Plot...")
@@ -312,7 +312,7 @@ if len(los_by_age) > 0:
     plt.close()
     print(f"   ✓ Saved: {fig_dir}/los_by_age.png")
 else:
-    print("   ⚠️ No LOS by age data available")
+    print("    No LOS by age data available")
 
 # 9. Discharge Disposition
 print("\n📊 Creating Discharge Disposition Plot...")
@@ -348,14 +348,14 @@ if len(discharge_data) > 0:
     plt.tight_layout()
     plt.savefig(f'{fig_dir}/discharge_disposition.png', dpi=150, bbox_inches='tight')
     plt.close()
-    print(f"   ✓ Saved: {fig_dir}/discharge_disposition.png")
+    print(f"    Saved: {fig_dir}/discharge_disposition.png")
 else:
-    print("   ⚠️ No discharge data available")
+    print("    No discharge data available")
 
 print("\n" + "=" * 70)
-print("✅ VISUALIZATION COMPLETE!")
+print(" VISUALIZATION COMPLETE!")
 print("=" * 70)
-print(f"\n📁 All figures saved in: {fig_dir}/")
+print(f"\n All figures saved in: {fig_dir}/")
 print("\nGenerated visualizations:")
 print("  1. age_distribution.png")
 print("  2. mortality_by_age.png")

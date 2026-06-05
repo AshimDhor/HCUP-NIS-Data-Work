@@ -19,12 +19,12 @@ print("=" * 70)
 con = duckdb.connect('nis2023.duckdb')
 
 # 1. Check what tables exist
-print("\n📋 Tables in DuckDB:")
+print("\n Tables in DuckDB:")
 tables = con.execute("SHOW TABLES").fetchdf()
 print(tables.to_string(index=False))
 
 # 2. Get basic info about merged table
-print("\n📊 Merged Table Info:")
+print("\n Merged Table Info:")
 info = con.execute("""
     SELECT 
         COUNT(*) as total_rows,
@@ -35,7 +35,7 @@ info = con.execute("""
 print(info.to_string(index=False))
 
 # 3. Check for TOTCHG column
-print("\n🔍 Checking for charge-related columns:")
+print("\n Checking for charge-related columns:")
 cols = con.execute("SELECT * FROM merged LIMIT 0").fetchdf().columns.tolist()
 charge_cols = [c for c in cols if 'CHG' in c.upper() or 'CHARGE' in c.upper() or 'TOT' in c.upper()]
 print(f"Found: {charge_cols if charge_cols else 'None - TOTCHG might be missing'}")
@@ -90,17 +90,17 @@ con.execute("""
 
 # Get count
 analysis_count = con.execute("SELECT COUNT(*) FROM merged_analysis").fetchone()[0]
-print(f"\n✓ Created merged_analysis table with {analysis_count:,} rows")
+print(f"\n Created merged_analysis table with {analysis_count:,} rows")
 
 # 5. Export to Parquet files
-print("\n💾 Exporting to Parquet files...")
+print("\n Exporting to Parquet files...")
 
 # Export merged_analysis to Parquet
 output_file = os.path.join(FINAL_DIR, "nis_2023_analysis.parquet")
 con.execute(f"""
     COPY merged_analysis TO '{output_file}' (FORMAT PARQUET)
 """)
-print(f"   ✓ Exported analysis table to: {output_file}")
+print(f"    Exported analysis table to: {output_file}")
 print(f"     File size: {os.path.getsize(output_file) / 1e9:.2f} GB")
 
 # Export a sample (50,000 rows) for quick analysis
@@ -111,10 +111,10 @@ con.execute(f"""
         USING SAMPLE 50000
     ) TO '{sample_file}' (FORMAT PARQUET)
 """)
-print(f"   ✓ Exported sample to: {sample_file}")
+print(f"    Exported sample to: {sample_file}")
 
 # 6. Generate summary statistics
-print("\n📈 Generating summary statistics...")
+print("\n Generating summary statistics...")
 
 summary = con.execute("""
     SELECT 
@@ -132,7 +132,7 @@ print("\n=== SUMMARY STATISTICS (Weighted National Estimates) ===")
 print(summary.to_string(index=False))
 
 # 7. Disparity analysis by age category
-print("\n📊 Outcomes by Age Category:")
+print("\n Outcomes by Age Category:")
 age_outcomes = con.execute("""
     SELECT 
         age_category,
@@ -155,7 +155,7 @@ age_outcomes = con.execute("""
 print(age_outcomes.to_string(index=False))
 
 # 8. Disparity analysis by sex
-print("\n📊 Outcomes by Sex:")
+print("\n Outcomes by Sex:")
 sex_outcomes = con.execute("""
     SELECT 
         sex,
@@ -168,7 +168,7 @@ sex_outcomes = con.execute("""
 print(sex_outcomes.to_string(index=False))
 
 # 9. Save column information
-print("\n📝 Saving variable information...")
+print("\n Saving variable information...")
 
 # Get all column names and types
 columns_info = con.execute("""
@@ -215,15 +215,15 @@ with open(readme_file, 'w') as f:
 print(f"   ✓ Saved README to: {readme_file}")
 
 print("\n" + "=" * 70)
-print("✅ EXPORT COMPLETE!")
+print(" EXPORT COMPLETE!")
 print("=" * 70)
-print(f"\n📁 All files saved in: {FINAL_DIR}/")
+print(f"\n All files saved in: {FINAL_DIR}/")
 print("   - nis_2023_analysis.parquet (main dataset)")
 print("   - nis_2023_sample.parquet (sample)")
 print("   - variable_list.txt")
 print("   - README.txt")
 
-print("\n🔑 Next steps:")
+print("\n Next steps:")
 print("   1. Load the data: df = pd.read_parquet('FINAL_DATA/nis_2023_analysis.parquet')")
 print("   2. Always use 'discharge_weight' for national estimates")
 print("   3. Ready for your high-impact paper analysis!")

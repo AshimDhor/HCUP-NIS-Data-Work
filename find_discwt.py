@@ -15,20 +15,20 @@ print("Checking Core files...")
 core_files = glob.glob(os.path.join(OUTPUT_DIR, "core", "*.parquet"))
 df_core = pd.read_parquet(core_files[0])
 if 'DISCWT' in df_core.columns:
-    print("  ✓ DISCWT found in Core file")
+    print("   DISCWT found in Core file")
     print(f"    Sample values: {df_core['DISCWT'].head(5).tolist()}")
 else:
-    print("  ✗ DISCWT NOT found in Core file")
+    print("   DISCWT NOT found in Core file")
 
 # Check hospital files
 print("\nChecking Hospital files...")
 hospital_files = glob.glob(os.path.join(OUTPUT_DIR, "hospital", "*.parquet"))
 df_hospital = pd.read_parquet(hospital_files[0])
 if 'DISCWT' in df_hospital.columns:
-    print("  ✓ DISCWT found in Hospital file")
+    print("   DISCWT found in Hospital file")
     print(f"    Sample values: {df_hospital['DISCWT'].head(5).tolist()}")
 else:
-    print("  ✗ DISCWT NOT found in Hospital file")
+    print("   DISCWT NOT found in Hospital file")
 
 # Check all columns in core
 print("\nAll columns in Core file (first 30):")

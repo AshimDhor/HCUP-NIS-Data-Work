@@ -15,7 +15,7 @@ print("NIS 2023 - Data Verification")
 print("=" * 70)
 
 # 1. Basic counts
-print("\n📊 Basic Statistics:")
+print("\n Basic Statistics:")
 result = con.execute("""
     SELECT 
         COUNT(*) as total_rows,
@@ -32,7 +32,7 @@ result = con.execute("""
 print(result.to_string(index=False))
 
 # 2. Check key variables
-print("\n📋 Key Variable Quality:")
+print("\n Key Variable Quality:")
 result = con.execute("""
     SELECT 
         'AGE' as variable,
@@ -74,7 +74,7 @@ print(result.to_string(index=False))
 
 # 3. Weighted national estimates
 print("\n" + "=" * 70)
-print("🏥 WEIGHTED NATIONAL ESTIMATES (Using DISCWT)")
+print(" WEIGHTED NATIONAL ESTIMATES (Using DISCWT)")
 print("=" * 70)
 
 weighted_stats = con.execute("""
@@ -111,7 +111,7 @@ print(f"Median LOS: {weighted_stats['median_los'].iloc[0]:.0f} days")
 
 # 4. Create analysis-ready table with derived variables
 print("\n" + "=" * 70)
-print("🔧 Creating Analysis-Ready Table with Derived Variables")
+print(" Creating Analysis-Ready Table with Derived Variables")
 print("=" * 70)
 
 # Create a new table with derived variables
@@ -221,7 +221,7 @@ print(sample.to_string(index=False))
 
 # 7. Quick disparity analysis (unadjusted)
 print("\n" + "=" * 70)
-print("📊 PRELIMINARY DISPARITY ANALYSIS (Income-Based)")
+print(" PRELIMINARY DISPARITY ANALYSIS (Income-Based)")
 print("=" * 70)
 
 disparity = con.execute("""
@@ -242,10 +242,10 @@ disparity = con.execute("""
 print(disparity.to_string(index=False))
 
 print("\n" + "=" * 70)
-print("✅ VERIFICATION COMPLETE!")
+print(" VERIFICATION COMPLETE!")
 print("=" * 70)
 
-print("\n📁 Your DuckDB database 'nis2023.duckdb' contains:")
+print("\n Your DuckDB database 'nis2023.duckdb' contains:")
 print("   - merged: Original merged table (6,743,716 rows)")
 print("   - merged_analysis: Analysis-ready table with derived variables")
-print("\n🔑 For your paper, remember to use discharge_weight for national estimates!")
+print("\n For your paper, remember to use discharge_weight for national estimates!")

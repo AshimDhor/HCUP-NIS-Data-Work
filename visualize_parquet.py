@@ -50,7 +50,7 @@ def load_parquet_data(dataset_name, limit=None):
     
     return pd.concat(dfs, ignore_index=True)
 
-print("\n📂 Loading data from Parquet files...")
+print("\n Loading data from Parquet files...")
 
 # Load core data (first 10 chunks for visualization)
 n_chunks = 10  # Adjust based on your RAM (10 chunks = ~1 million rows)
@@ -60,13 +60,13 @@ df_core = load_parquet_data("core", limit=n_chunks)
 # Load hospital data (small file, load all)
 df_hospital = load_parquet_data("hospital", limit=None)
 
-print(f"\n✅ Loaded {len(df_core):,} core rows, {len(df_hospital):,} hospital rows")
+print(f"\n Loaded {len(df_core):,} core rows, {len(df_hospital):,} hospital rows")
 
 # ============================================
 # Data Cleaning and Type Conversion
 # ============================================
 
-print("\n🔄 Converting data types...")
+print("\n Converting data types...")
 
 # Convert key columns to numeric
 numeric_cols = ['AGE', 'FEMALE', 'DIED', 'LOS', 'DISCWT', 'NDX', 'NPR', 'AMONTH', 'AWEEKEND', 'DRG']
@@ -148,7 +148,7 @@ if len(mortality_by_age) > 0:
     print(f"   ✓ Saved: mortality_by_age.png")
 
 # 3. Length of Stay Distribution
-print("\n📊 3. Creating Length of Stay Plot...")
+print("\n 3. Creating Length of Stay Plot...")
 los_valid = df_merged[df_merged['LOS'].notna() & (df_merged['LOS'] > 0) & (df_merged['LOS'] <= 30)]
 
 if len(los_valid) > 0:
@@ -174,7 +174,7 @@ if len(los_valid) > 0:
     print(f"   ✓ Saved: los_distribution.png")
 
 # 4. Gender Distribution
-print("\n📊 4. Creating Gender Distribution Plot...")
+print("\n 4. Creating Gender Distribution Plot...")
 gender_counts = df_merged['SEX'].value_counts()
 
 if len(gender_counts) > 0:
@@ -190,7 +190,7 @@ if len(gender_counts) > 0:
     print(f"   ✓ Saved: gender_distribution.png")
 
 # 5. Mortality by Gender
-print("\n📊 5. Creating Mortality by Gender Plot...")
+print("\n 5. Creating Mortality by Gender Plot...")
 mortality_gender = df_merged.groupby('SEX')['DIED'].mean() * 100
 
 if len(mortality_gender) > 0:
@@ -212,7 +212,7 @@ if len(mortality_gender) > 0:
     print(f"   ✓ Saved: mortality_by_gender.png")
 
 # 6. Seasonal Variation
-print("\n📊 6. Creating Seasonal Variation Plot...")
+print("\n 6. Creating Seasonal Variation Plot...")
 if 'AMONTH' in df_merged.columns:
     monthly_data = df_merged[df_merged['AMONTH'].notna() & (df_merged['AMONTH'] >= 1) & (df_merged['AMONTH'] <= 12)]
     monthly_counts = monthly_data.groupby('AMONTH').size()
@@ -276,7 +276,7 @@ if len(available_vars) >= 2:
         print(f"   ✓ Saved: correlation_heatmap.png")
 
 # 9. LOS by Age Group (Boxplot)
-print("\n📊 9. Creating LOS by Age Group Plot...")
+print("\n 9. Creating LOS by Age Group Plot...")
 los_age_data = df_merged[df_merged['AGE_GROUP'].notna() & df_merged['LOS'].notna() & (df_merged['LOS'] <= 30)]
 if len(los_age_data) > 0:
     fig, ax = plt.subplots(figsize=(12, 6))
@@ -330,7 +330,7 @@ print(f"Mean LOS: {df_merged['LOS'].mean():.1f} days")
 print(f"Median LOS: {df_merged['LOS'].median():.0f} days")
 
 # Create a simple HTML report
-print("\n📄 Creating HTML report...")
+print("\n Creating HTML report...")
 report_path = os.path.join(FIG_DIR, "report.html")
 with open(report_path, 'w') as f:
     f.write(f"""<!DOCTYPE html>
@@ -371,9 +371,9 @@ h1 {{ color: #2c3e50; }}
 print(f"   ✓ HTML report saved: {report_path}")
 
 print("\n" + "=" * 70)
-print("✅ VISUALIZATION COMPLETE!")
+print(" VISUALIZATION COMPLETE!")
 print("=" * 70)
-print(f"\n📁 All figures saved in: {FIG_DIR}/")
-print(f"\n🌐 To view the HTML report:")
+print(f"\n All figures saved in: {FIG_DIR}/")
+print(f"\n To view the HTML report:")
 print(f"   firefox {report_path}")
 print(f"   or start a web server: cd {FIG_DIR} && python3 -m http.server 8000")

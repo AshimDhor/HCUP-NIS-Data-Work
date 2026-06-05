@@ -30,7 +30,7 @@ print("=" * 80)
 # 1. LOAD DATA
 # ============================================
 
-print("\n📂 Loading data...")
+print("\n Loading data...")
 
 def load_data(chunks=10):
     """Load and merge data from parquet files"""
@@ -53,13 +53,13 @@ def load_data(chunks=10):
 
 # Load data (adjust chunks based on your RAM)
 df = load_data(chunks=15)  # ~1.5 million rows
-print(f"✅ Loaded {len(df):,} rows with {len(df.columns)} columns")
+print(f" Loaded {len(df):,} rows with {len(df.columns)} columns")
 
 # ============================================
 # 2. CHECK AVAILABLE COLUMNS
 # ============================================
 
-print("\n📋 Available columns for analysis:")
+print("\n Available columns for analysis:")
 key_cols = ['AGE', 'FEMALE', 'DIED', 'LOS', 'DISCWT', 'AMONTH', 'AWEEKEND', 
             'DRG', 'ZIPINC_QRTL', 'PAY1', 'HOSP_LOCTEACH', 'HOSP_BEDSIZE']
 available_cols = [col for col in key_cols if col in df.columns]
@@ -70,7 +70,7 @@ for col in available_cols:
 # 3. DATA CLEANING AND PREPARATION
 # ============================================
 
-print("\n🔄 Preparing data for analysis...")
+print("\n Preparing data for analysis...")
 
 # Convert to numeric
 for col in available_cols:
@@ -97,7 +97,7 @@ if 'HOSP_LOCTEACH' in df.columns:
 # Clean data - keep only rows with essential variables
 essential_cols = ['AGE', 'FEMALE', 'DIED', 'LOS']
 df_clean = df.dropna(subset=essential_cols)
-print(f"✅ Clean data: {len(df_clean):,} rows")
+print(f" Clean data: {len(df_clean):,} rows")
 
 # ============================================
 # 4. DESCRIPTIVE STATISTICS (TABLE 1 FOR PAPER)
@@ -148,20 +148,20 @@ print("=" * 80)
 age_survived = survived['AGE'].dropna()
 age_died = died['AGE'].dropna()
 t_stat, p_value = ttest_ind(age_survived, age_died)
-print(f"\n📊 Age difference (survived vs died):")
+print(f"\n Age difference (survived vs died):")
 print(f"   t-statistic: {t_stat:.2f}, p-value: {p_value:.4f} {'(SIGNIFICANT)' if p_value < 0.05 else '(NOT significant)'}")
 
 # T-test for LOS
 los_survived = survived['LOS'].dropna()
 los_died = died['LOS'].dropna()
 t_stat, p_value = ttest_ind(los_survived, los_died)
-print(f"\n📊 LOS difference (survived vs died):")
+print(f"\n LOS difference (survived vs died):")
 print(f"   t-statistic: {t_stat:.2f}, p-value: {p_value:.4f} {'(SIGNIFICANT)' if p_value < 0.05 else '(NOT significant)'}")
 
 # Chi-square for gender and mortality
 contingency = pd.crosstab(df_clean['SEX'], df_clean['DIED'])
 chi2, p_value, dof, expected = chi2_contingency(contingency)
-print(f"\n📊 Gender and mortality association:")
+print(f"\n Gender and mortality association:")
 print(f"   Chi-square: {chi2:.2f}, p-value: {p_value:.4f} {'(SIGNIFICANT)' if p_value < 0.05 else '(NOT significant)'}")
 print("\nContingency table:")
 print(contingency)
@@ -433,9 +433,9 @@ with open(report_path, 'w') as f:
 print(f"✓ Saved: statistical_report.txt")
 
 print("\n" + "=" * 80)
-print("✅ STATISTICAL ANALYSIS COMPLETE!")
+print(" STATISTICAL ANALYSIS COMPLETE!")
 print("=" * 80)
-print(f"\n📁 Results saved in: {RESULTS_DIR}/")
+print(f"\n Results saved in: {RESULTS_DIR}/")
 print("   - table1_descriptive.csv (Table 1 for paper)")
 if results_df is not None:
     print("   - logistic_regression.csv (Multivariable analysis)")
@@ -446,7 +446,7 @@ if 'TEACHING' in df_clean.columns:
     print("   - hospital_variation.csv (Hospital variation)")
 print("   - statistical_report.txt (Summary report)")
 
-print("\n🔑 INTERPRETATION GUIDE:")
+print("\n INTERPRETATION GUIDE:")
 print("   - OR > 1: Increased mortality risk")
 print("   - OR < 1: Decreased mortality risk")
 print("   - p < 0.05: Statistically significant")

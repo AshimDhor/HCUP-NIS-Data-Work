@@ -24,7 +24,7 @@ print("=" * 70)
 # 1. Load all data
 # ============================================
 
-print("\n📂 Loading data with tqdm...")
+print("\n Loading data with tqdm...")
 
 # Core data (has DISCWT)
 core_files = sorted(glob.glob(os.path.join(OUTPUT_DIR, "core", "*.parquet")))
@@ -62,14 +62,14 @@ print(f"   DISCWT in hospital: {'Yes' if 'DISCWT' in df_hospital.columns else 'N
 # ============================================
 
 if 'DISCWT' in df_hospital.columns:
-    print("\n⚠️  Removing DISCWT from hospital data to preserve core weights")
+    print("\n  Removing DISCWT from hospital data to preserve core weights")
     df_hospital = df_hospital.drop(columns=['DISCWT'])
 
 # ============================================
 # 3. Merge carefully
 # ============================================
 
-print("\n🔗 Merging datasets...")
+print("\n Merging datasets...")
 
 # Start with core (keep its DISCWT)
 df_merged = df_core.copy()
@@ -91,7 +91,7 @@ print(f"   After hospital: {len(df_merged):,} rows")
 # 4. Verify DISCWT is still there
 # ============================================
 
-print("\n⚖️  Verifying DISCWT...")
+print("\n  Verifying DISCWT...")
 
 if 'DISCWT' in df_merged.columns:
     # Convert to numeric
@@ -114,7 +114,7 @@ else:
 # 5. Convert variables to proper types
 # ============================================
 
-print("\n🔄 Converting data types...")
+print("\n Converting data types...")
 
 numeric_cols = ['AGE', 'FEMALE', 'LOS', 'DIED', 'NDX', 'NPR', 'ORPROC', 'PAY1', 'ZIPINC_QRTL', 'TOTCHG']
 for col in numeric_cols:
@@ -204,7 +204,7 @@ if len(df_valid) > 0:
             print(f"   Female: {weighted_female*100:.1f}%")
     
     # Outcomes
-    print(f"\n📈 Outcomes:")
+    print(f"\n Outcomes:")
     
     if 'DIED' in df_valid.columns:
         died_valid = df_valid[df_valid['DIED'].notna()]
@@ -229,7 +229,7 @@ if len(df_valid) > 0:
     
     # Socioeconomic disparities
     if 'INCOME_GROUP' in df_valid.columns:
-        print(f"\n💰 Socioeconomic Distribution (by ZIP code income quartile):")
+        print(f"\n Socioeconomic Distribution (by ZIP code income quartile):")
         income_stats = df_valid.groupby('INCOME_GROUP').apply(
             lambda x: pd.Series({
                 'n': len(x),
@@ -247,7 +247,7 @@ if len(df_valid) > 0:
     
     # Payer distribution
     if 'PAYER_GROUP' in df_valid.columns:
-        print(f"\n💳 Insurance Payer:")
+        print(f"\n Insurance Payer:")
         payer_stats = df_valid.groupby('PAYER_GROUP').apply(
             lambda x: x['DISCWT'].sum() / total_discharges * 100
         ).sort_values(ascending=False)
@@ -281,19 +281,19 @@ else:
 # 8. Save everything
 # ============================================
 
-print("\n💾 Saving merged data...")
+print("\n Saving merged data...")
 
 # Save full dataset
 output_file = os.path.join(FINAL_DIR, "nis_2023_full.parquet")
 df_merged.to_parquet(output_file, compression='snappy', index=False)
-print(f"   ✓ Full data: {output_file}")
+print(f"    Full data: {output_file}")
 print(f"     Size: {os.path.getsize(output_file) / 1e9:.2f} GB")
 
 # Save sample
 sample_file = os.path.join(FINAL_DIR, "nis_2023_sample.parquet")
 df_sample = df_merged.sample(min(50000, len(df_merged)), random_state=42)
 df_sample.to_parquet(sample_file, index=False)
-print(f"   ✓ Sample: {sample_file}")
+print(f"    Sample: {sample_file}")
 
 # Save codebook of available variables
 codebook_file = os.path.join(FINAL_DIR, "variable_codebook.txt")
@@ -309,18 +309,18 @@ with open(codebook_file, 'w') as f:
         non_null = df_merged[col].notna().sum()
         null_pct = (1 - non_null/len(df_merged)) * 100
         f.write(f"{col:<30} {str(dtype):<15} (non-null: {non_null:,}, {null_pct:.1f}% missing)\n")
-print(f"   ✓ Codebook: {codebook_file}")
+print(f"    Codebook: {codebook_file}")
 
 print("\n" + "=" * 70)
-print("✅ DATA PREPARATION COMPLETE!")
+print(" DATA PREPARATION COMPLETE!")
 print("=" * 70)
 
-print("\n📁 All files saved in: FINAL_DATA/")
+print("\n All files saved in: FINAL_DATA/")
 print("   - nis_2023_full.parquet  (complete dataset with weights)")
 print("   - nis_2023_sample.parquet (50,000 row sample)")
 print("   - variable_codebook.txt   (all column names & descriptions)")
 
-print("\n🔑 Quick start for analysis:")
+print("\n Quick start for analysis:")
 print("   import pandas as pd")
 print("   import numpy as np")
 print("   df = pd.read_parquet('FINAL_DATA/nis_2023_full.parquet')")
